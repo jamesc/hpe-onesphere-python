@@ -177,7 +177,7 @@ class OSClient:
         except ValueError:
             raise Exception("info_array should be in JSON format.")
         full_url = self.rest_prefix + OSClient.URI_APPLIANCES + "/" + appliance_id
-        r = requests.put(full_url, headers=OSClient.HEADERS, json=info_array)
+        r = requests.put(full_url, headers=OSClient.HEADERS, data=info_array)
         return r.json()
 
     # Catalog Types APIs
@@ -267,7 +267,7 @@ class OSClient:
         except ValueError:
             raise Exception("info should be in JSON format.")
         full_url = self.rest_prefix + OSClient.URI_DEPLOYMENTS
-        r = requests.post(full_url, headers=OSClient.HEADERS, json=info)
+        r = requests.post(full_url, headers=OSClient.HEADERS, data=info)
         return r.json()
 
     @stringnotempty(['deployment_id'])
@@ -284,7 +284,7 @@ class OSClient:
         except ValueError:
             raise Exception("info should be in JSON format.")
         full_url = self.rest_prefix + OSClient.URI_DEPLOYMENTS + "/" + deployment_id
-        r = requests.put(full_url, headers=OSClient.HEADERS, json=info)
+        r = requests.put(full_url, headers=OSClient.HEADERS, data=info)
         return r.json()
 
     @stringnotempty(['deployment_id'])
@@ -400,7 +400,7 @@ class OSClient:
         except ValueError:
             raise Exception("info_array should be in JSON format.")
         full_url = self.rest_prefix + OSClient.URI_NETWORKS + "/" + network_id
-        r = requests.put(full_url, headers=OSClient.HEADERS, json=info_array)
+        r = requests.put(full_url, headers=OSClient.HEADERS, data=info_array)
         return r.json()
 
     # Password Reset APIs
@@ -526,7 +526,7 @@ class OSClient:
         except ValueError:
             raise Exception("info_array should be in JSON format.")
         full_url = self.rest_prefix + OSClient.URI_PROVIDERS + "/" + provider_id
-        r = requests.put(full_url, headers=OSClient.HEADERS, json=info_array)
+        r = requests.put(full_url, headers=OSClient.HEADERS, data=info_array)
         return r.json()
 
     # Rates APIs
@@ -604,7 +604,7 @@ class OSClient:
         except ValueError:
             raise Exception("info_array should be in JSON format.")
         full_url = self.rest_prefix + OSClient.URI_REGIONS + "/" + region_id
-        r = requests.put(full_url, headers=OSClient.HEADERS, json=info_array)
+        r = requests.put(full_url, headers=OSClient.HEADERS, data=info_array)
         return r.json()
 
     @notimplementedyet
@@ -615,7 +615,7 @@ class OSClient:
         except ValueError:
             raise Exception("region should be in JSON format.")
         full_url = self.rest_prefix + OSClient.URI_REGIONS + "/" + region_id
-        r = requests.put(full_url, headers=OSClient.HEADERS, json=region)
+        r = requests.put(full_url, headers=OSClient.HEADERS, data=region)
         return r.json()
 
     @stringnotempty(['region_id'])
@@ -886,7 +886,7 @@ class OSClient:
             json.loads(zone_data)
         except ValueError:
             raise Exception("zone_data should be in JSON format.")
-        r = requests.post(full_url, headers=OSClient.HEADERS, json=zone_data)
+        r = requests.post(full_url, headers=OSClient.HEADERS, data=zone_data)
         return r.json()
 
     # view: "full"
