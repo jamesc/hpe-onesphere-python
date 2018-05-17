@@ -1,15 +1,15 @@
 # (C) Copyright 2018 Hewlett Packard Enterprise Development LP.
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
 # to deal in the Software without restriction, including without limitation
 # the rights to use, copy, modify, merge, publish, distribute, sublicense,
 # and/or sell copies of the Software, and to permit persons to whom the
 # Software is furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included
 # in all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
@@ -119,7 +119,7 @@ class OSClient:
     def Disconnect(self):
         full_url = self.rest_prefix + OSClient.URI_SESSION
         r = requests.delete(full_url, headers=OSClient.HEADERS)
- 
+
     # Account APIs
 
     @notimplementedyet
@@ -141,13 +141,13 @@ class OSClient:
         r = requests.get(full_url, headers=OSClient.HEADERS, params=params)
         return r.json()
 
-    def CreateAppliance(self, ep_address, ep_username, ep_password, 
+    def CreateAppliance(self, ep_address, ep_username, ep_password,
                         name, region_uri, appliance_type):
         full_url = self.rest_prefix + OSClient.URI_APPLIANCES
         end_point = {"address": ep_address,
                      "password": ep_password,
                      "username": ep_username}
-        data={"endpoint": end_point, 
+        data={"endpoint": end_point,
               "name": name,
               "regionUri": region_uri,
               "type": appliance_type}
@@ -203,13 +203,13 @@ class OSClient:
     @stringnotempty(['access_key', 'catalog_type_uri', 'name', 'password', 'region_name', 'secret_key', 'url', 'username'])
     def CreateCatalog(self, access_key, catalog_type_uri, name, password, region_name, secret_key, url, username):
         full_url = self.rest_prefix + OSClient.URI_CATALOGS
-        data = {"accessKey": access_key, 
-                "catalogTypeUri": catalog_type_uri, 
-                "name": name, 
-                "password": password, 
-                "regionName": region_name, 
-                "secretKey": secret_key, 
-                "url": url, 
+        data = {"accessKey": access_key,
+                "catalogTypeUri": catalog_type_uri,
+                "name": name,
+                "password": password,
+                "regionName": region_name,
+                "secretKey": secret_key,
+                "url": url,
                 "username": username}
         r = requests.post(full_url, headers=OSClient.HEADERS, json=data)
         return r.json()
@@ -231,7 +231,7 @@ class OSClient:
     @stringnotempty(['catalog_id', 'name', 'password', 'access_key', 'secret_key', 'region_name', 'state'])
     def UpdateCatalog(self, catalog_id, name, password, access_key, secret_key, region_name, state):
         full_url = self.rest_prefix + OSClient.URI_CATALOGS + "/" + catalog_id
-        data = {"name": name, "password": password, "accessKey": access_key, 
+        data = {"name": name, "password": password, "accessKey": access_key,
                 "secretKey": secret_key, "regionName": region_name, "state": state}
         r = requests.put(full_url, headers=OSClient.HEADERS, json=data)
         return r.json()
@@ -359,10 +359,10 @@ class OSClient:
 
     # Metrics APIs
 
-    def GetMetrics(self, resource_uri, category, group_by, query, name, 
+    def GetMetrics(self, resource_uri, category, group_by, query, name,
                    period_start, period, period_count, view, start, count):
         full_url = self.rest_prefix + OSClient.URI_METRICS
-        params = {"resourceUri": resource_uri, 
+        params = {"resourceUri": resource_uri,
                 "category": category,
                 "groupBy": group_by,
                 "query": query,
@@ -482,22 +482,22 @@ class OSClient:
 
     # payment_provider: True|False
     # state: "Enabled|Disabled"
-    @stringnotempty(['provider_id', 'provider_type_uri', 
+    @stringnotempty(['provider_id', 'provider_type_uri',
                      'access_key', 'secret_key',
                      'payment_provider', 's3_cost_bucket',
                      'master_uri', 'state'])
-    def CreateProvider(self, provider_id, provider_type_uri, 
+    def CreateProvider(self, provider_id, provider_type_uri,
                        access_key, secret_key,
                        payment_provider, s3_cost_bucket,
                        master_uri, state):
         full_url = self.rest_prefix + OSClient.URI_PROVIDERS
-        data={"id": provider_id, 
-              "providerTypeUri": provider_type_uri, 
-              "accessKey": access_key, 
-              "secretKey": secret_key, 
-              "paymentProvider": payment_provider, 
-              "s3CostBucket": s3_cost_bucket, 
-              "masterUri": master_uri, 
+        data={"id": provider_id,
+              "providerTypeUri": provider_type_uri,
+              "accessKey": access_key,
+              "secretKey": secret_key,
+              "paymentProvider": payment_provider,
+              "s3CostBucket": s3_cost_bucket,
+              "masterUri": master_uri,
               "state": state}
         r = requests.post(full_url, headers=OSClient.HEADERS, json=data)
         return r.json()
@@ -535,8 +535,8 @@ class OSClient:
     # active: boolean
     # start: integer
     # count: integer
-    def GetRates(self, resource_uri="", 
-                 effective_for_date="", effective_date="", 
+    def GetRates(self, resource_uri="",
+                 effective_for_date="", effective_date="",
                  metric_name="", active=True,
                  start=0, count=0):
         full_url = self.rest_prefix + OSClient.URI_RATES
@@ -570,10 +570,10 @@ class OSClient:
     @stringnotempty(['name', 'provider_uri', 'loc_latitude', 'loc_longitude'])
     def CreateRegion(self, name, provider_uri, loc_latitude, loc_longitude):
         full_url = self.rest_prefix + OSClient.URI_REGIONS
-        data = {"name": name, 
-                "providerUri": provider_uri, 
+        data = {"name": name,
+                "providerUri": provider_uri,
                 "location": {
-                    "latitude": loc_latitude, 
+                    "latitude": loc_latitude,
                     "longitude": loc_longitude}}
         r = requests.post(full_url, headers=OSClient.HEADERS, json=data)
         return r.json()
@@ -625,17 +625,17 @@ class OSClient:
         return r.json()
 
     # state: "Enabling|Enabled|Disabling|Disabled"
-    @stringnotempty(['region_id', 'endpoint_uuid', 'name', 
-                     'loc_ipaddress', 'loc_username', 'loc_password', 'loc_port', 
+    @stringnotempty(['region_id', 'endpoint_uuid', 'name',
+                     'loc_ipaddress', 'loc_username', 'loc_password', 'loc_port',
                      'state', 'uri'])
-    def CreateRegionConnection(self, region_id, endpoint_uuid, name, 
-                               loc_ipaddress, loc_username, loc_password, loc_port, 
+    def CreateRegionConnection(self, region_id, endpoint_uuid, name,
+                               loc_ipaddress, loc_username, loc_password, loc_port,
                                state, uri):
         full_url = self.rest_prefix + OSClient.URI_REGIONS + "/" + region_id + "/connection"
         data = {"endpointUuid": endpoint_uuid,
-                "name": name, 
+                "name": name,
                 "location": {
-                    "ipAddress": loc_ipaddress, 
+                    "ipAddress": loc_ipaddress,
                     "username": loc_username,
                     "password": loc_password,
                     "port": loc_port},
